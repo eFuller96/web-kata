@@ -5,7 +5,7 @@ import data from './data.js'
 class App extends Component {
   render() {
     var products = data.products.map(x => 
-      <li>{x.name}</li>)
+      <li key={x.name}>{x.name}</li>)
 
     return <div className="App">
       <div className="App-header">
