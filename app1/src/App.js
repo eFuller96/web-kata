@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import './App.css'
+import data from './data.js' 
 
 class App extends Component {
   render() {
+    var products = data.products.map(x => 
+      <li>{x.name}</li>)
+
     return <div className="App">
       <div className="App-header">
         <h2>Welcome Introduction to <code>web-kata#1</code></h2>
       </div>
-      <p className="App-intro">
-        To get started change this text and save save to reload.
-      </p>
       <div className='products'>
-        ... your code here
+        {products}
       </div>
     </div>
   }
