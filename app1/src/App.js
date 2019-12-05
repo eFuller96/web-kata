@@ -14,10 +14,10 @@ class Product extends React.Component {
 class App extends Component {
   render() {
     var products = data.products
-    
+
     return <div className="App">
       <div className="App-header">
-        <h2>Welcome Introduction to <code>web-kata#1</code></h2>
+        <h2>Redgate Products</h2>
       </div>
       <div className='products'>
         <Product products={products}/>
