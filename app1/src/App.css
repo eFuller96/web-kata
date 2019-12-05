@@ -1,14 +1,20 @@
 .App {
   text-align: center;
+  vertical-align: middle;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: rgb(67, 67, 67);
+  height: 80px;
   padding: 20px;
   color: white;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.productList{
+  padding-top: 20px;
+  background-color: rosybrown;
 }
