@@ -5,7 +5,7 @@ import data from './data.js'
 class Product extends React.Component {
   render() {
     const productNames = this.props.products.map(x =>
-      <li key={x.name}>{x.name}</li>)
+        <li key={x.name}>{x.name}<b>{x.free ? '[ Free!!! ]' : ''}</b></li>)
 
     return <div>{productNames}</div>
   }
