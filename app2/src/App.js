@@ -1,4 +1,3 @@
-import _ from 'underscore'
 import React, { Component } from 'react'
 import './App.css'
 import data from './data.js'
@@ -10,6 +9,7 @@ class App extends Component {
     this.state = {products: data.products}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmitProduct = this.handleSubmitProduct.bind(this)
+    this.handleRemoveProduct = this.handleRemoveProduct.bind(this)
   }
 
   handleInputChange(event) {
@@ -31,7 +31,18 @@ class App extends Component {
     });
     
     this.setState({
-      products: updatedProductsArray })
+      products: updatedProductsArray
+    })
+  }
+
+  handleRemoveProduct(productToRemove) {
+    
+    var updatedProductsArray = this.state.products.filter(product =>
+      product.name !== productToRemove.name)
+
+    this.setState({
+      products: updatedProductsArray
+    })
   }
 
   render() {
@@ -56,7 +67,7 @@ class App extends Component {
         </form>
       </div>
       <div className='products-container'>
-        <Products products={this.state.products} />
+        <Products products={this.state.products} parentMethod={this.handleRemoveProduct} />
       </div>
     </div>
   }
