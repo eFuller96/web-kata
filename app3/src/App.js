@@ -8,10 +8,11 @@ class App extends Component {
 
   constructor(props){
     super(props)
-    this.state= {products: data.products}
+    this.state= {products: data.products, nameSearch: ''}
 
     this.handleAddProduct = this.handleAddProduct.bind(this)
     this.removeProduct = this.removeProduct.bind(this)
+    this.handleFilterProduct = this.handleFilterProduct.bind(this)
   }
 
   handleAddProduct(event){
@@ -31,12 +32,25 @@ class App extends Component {
     this.setState({products: newProducts})
   }
 
+  handleFilterProduct(event){
+    this.setState({nameSearch: event.target.value})
+  }
+
   render() {
+    var filteredResults= _.filter(this.state.products, (product) => product.name.toUpperCase().includes(this.state.nameSearch.toUpperCase()))
+    
     return <div className="App">
       <div className="App-header">
         <h2>Kata 3- Filter, show and hide objects</h2>
       </div>
-      <div className='filter-products'>Filter products here...</div>
+      <div className='filter-products'>
+        Filter products by name
+        <form>
+          <label>product name:
+            <input type='text' name='name' onChange={this.handleFilterProduct} />
+          </label>
+        </form>
+      </div>
       <div className='add-product'>
         <form onSubmit={this.handleAddProduct}>
           <label>product name:
@@ -49,7 +63,7 @@ class App extends Component {
         </form>
       </div>
       <div className='products-container'>
-        <Products products={this.state.products} removeProduct={this.removeProduct} />
+        <Products products={filteredResults} removeProduct={this.removeProduct} />
       </div>
     </div>
   }
