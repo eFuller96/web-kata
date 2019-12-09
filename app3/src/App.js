@@ -7,12 +7,14 @@ import Products from './Products.js'
 class App extends Component {
 
   constructor(props){
+    data.products.forEach((product) => product.collapseDescription = false)
     super(props)
     this.state= {products: data.products, nameSearch: ''}
 
     this.handleAddProduct = this.handleAddProduct.bind(this)
     this.removeProduct = this.removeProduct.bind(this)
     this.handleFilterProduct = this.handleFilterProduct.bind(this)
+    this.collapseDescription = this.collapseDescription.bind(this)
   }
 
   handleAddProduct(event){
@@ -21,7 +23,8 @@ class App extends Component {
 
     products.push({
       name: event.target.name.value,
-      description: event.target.description.value
+      description: event.target.description.value,
+      collapseDescription: false
     })
 
     this.setState({products: products})
@@ -30,6 +33,23 @@ class App extends Component {
   removeProduct(product){
     const newProducts = _.filter(this.state.products, p => p.name !== product.name)
     this.setState({products: newProducts})
+  }
+
+  collapseDescription(product){
+      var indexToEdit = this.state.products.findIndex(x => x.name === product.name)
+      var updatedArray = this.state.products.slice()
+      updatedArray[indexToEdit].collapseDescription = !this.state.products[indexToEdit].collapseDescription
+
+      this.setState({
+        products: updatedArray
+      })
+      
+      // WHY DOESN'T THIS WORK!
+     //   *************************
+      /*var updateProduct = this.state.products.map(function(p){
+      if(p.name === product.name){
+        return p.collapseDescription = !p.collapseDescription
+      }}) */
   }
 
   handleFilterProduct(event){
@@ -65,7 +85,7 @@ class App extends Component {
         </form>
       </div>
       <div className='products-container'>
-        <Products products={filteredResults} removeProduct={this.removeProduct} />
+        <Products products={filteredResults} removeProduct={this.removeProduct} collapseDescription={this.collapseDescription}/>
       </div>
     </div>
   }
