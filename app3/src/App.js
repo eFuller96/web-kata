@@ -45,11 +45,13 @@ class App extends Component {
       </div>
       <div className='filter-products'>
         Filter products by name
-        <form>
-          <label>product name:
-            <input type='text' name='name' onChange={this.handleFilterProduct} />
-          </label>
-        </form>
+        <div className='filter-form'>
+          <form>
+            <label>product name:
+              <input type='text' name='name' onChange={this.handleFilterProduct} />
+            </label>
+          </form>
+        </div>
       </div>
       <div className='add-product'>
         <form onSubmit={this.handleAddProduct}>
