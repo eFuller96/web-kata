@@ -6,7 +6,7 @@ class Product extends Component{
         return <div className='product'>
             <div className='details'>
                 <div className='name'>{this.props.product.name}</div>
-                <div className='desc'>{this.props.product.collapseDescription === false ? this.props.product.description : '' }</div>
+                <div className='desc'>{(!this.props.product.collapseDescription) && this.props.product.description }</div>
             </div>
             <div className='actions'>
                 <div className='remove' title='fix me' onClick={() => this.props.removeProduct(this.props.product)}>x</div>

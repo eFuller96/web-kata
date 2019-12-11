@@ -7,10 +7,15 @@ import Products from './Products.js'
 class App extends Component {
 
   constructor(props){
-    data.products.forEach((product) => product.collapseDescription = false)
     super(props)
-    this.state= {products: data.products, nameSearch: ''}
+    const products = data.products.map(p => {
+      return {
+        ...p, 
+        collapseDescription: false
+      }
+    })
 
+    this.state= {products, filteredProducts: products}
     this.handleAddProduct = this.handleAddProduct.bind(this)
     this.removeProduct = this.removeProduct.bind(this)
     this.handleFilterProduct = this.handleFilterProduct.bind(this)
@@ -27,7 +32,7 @@ class App extends Component {
       collapseDescription: false
     })
 
-    this.setState({products: products})
+    this.setState({products})
   }
 
   removeProduct(product){
@@ -36,28 +41,29 @@ class App extends Component {
   }
 
   collapseDescription(product){
-      var indexToEdit = this.state.products.findIndex(x => x.name === product.name)
-      var updatedArray = this.state.products.slice()
-      updatedArray[indexToEdit].collapseDescription = !this.state.products[indexToEdit].collapseDescription
-
-      this.setState({
-        products: updatedArray
+    const updateArray = this.state.filteredProducts.map(function(p){
+    if(p.name === product.name){
+      return {
+        ...p,
+        collapseDescription: !p.collapseDescription
+      }
+    } else{
+      return p
+    }})
+    this.setState({
+      filteredProducts: updateArray
       })
-      
-      // WHY DOESN'T THIS WORK!
-     //   *************************
-      /*var updateProduct = this.state.products.map(function(p){
-      if(p.name === product.name){
-        return p.collapseDescription = !p.collapseDescription
-      }}) */
   }
 
   handleFilterProduct(event){
-    this.setState({nameSearch: event.target.value})
+    const nameSearch = event.target.value
+    const filteredProducts=this.state.products.filter(product => product.name.toUpperCase().includes(nameSearch.toUpperCase()))
+    this.setState({
+      filteredProducts
+    })
   }
 
   render() {
-    var filteredResults= _.filter(this.state.products, (product) => product.name.toUpperCase().includes(this.state.nameSearch.toUpperCase()))
     
     return <div className="App">
       <div className="App-header">
@@ -85,7 +91,7 @@ class App extends Component {
         </form>
       </div>
       <div className='products-container'>
-        <Products products={filteredResults} removeProduct={this.removeProduct} collapseDescription={this.collapseDescription}/>
+        <Products products={this.state.filteredProducts} removeProduct={this.removeProduct} collapseDescription={this.collapseDescription}/>
       </div>
     </div>
   }
