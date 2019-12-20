@@ -13,8 +13,10 @@ class ProductContainer extends Component {
   }
 
   render() {    
+    const product = data.products.find(p => p.name === this.props.match.params.productName)
+    console.error(product)
     return <div className='product-container'>
-      {this.props.match.params.productName}
+      <Product product={product} />
     </div>
   }
 }
