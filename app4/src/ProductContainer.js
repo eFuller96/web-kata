@@ -14,7 +14,7 @@ class ProductContainer extends Component {
 
   render() {    
     return <div className='product-container'>
-      Product container
+      {this.props.match.params.productName}
     </div>
   }
 }

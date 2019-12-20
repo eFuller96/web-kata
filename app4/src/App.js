@@ -20,8 +20,7 @@ class App extends Component {
       </div>
         <div className='products-container'>
           <ProductMenu products={this.state.products} />
-          <Route exact path='/:productName'>
-            <ProductContainer />
+          <Route exact path='/:productName' component={ProductContainer}>
           </Route>
         </div>
     </div>
