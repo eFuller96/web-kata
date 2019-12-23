@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import data from './data.js'
-
 import ProductMenu from './ProductMenu.js'
 import ProductContainer from './ProductContainer.js'
-import { Route } from '../node_modules/react-router-dom'
+import { Route } from 'react-router-dom'
 import './App.css'
 
 class App extends Component {
